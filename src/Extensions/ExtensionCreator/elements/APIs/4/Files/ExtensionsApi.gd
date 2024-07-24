@@ -89,6 +89,10 @@ class GeneralAPI:
 	func get_canvas():
 		return
 
+	## Creates a ValueSlider
+	func create_value_slider() -> ValueSlider:
+		return ValueSlider.new()
+
 
 ## Gives ability to add/remove items from menus in the top bar.
 class MenuAPI:
@@ -390,6 +394,27 @@ class ImportAPI:
 class PaletteAPI:
 	## Creates and adds a new [Palette] with name [param palette_name] with [param data]
 	## in the form of a [Dictionary].
+	## An example of [code]data[/code] dictionary will be:[codeblock]
+	## {
+	## "colors": [
+	##  {
+	##   "color": "(0, 0, 0, 1)",
+	##   "index": 0
+	##  },
+	##  {
+	##   "color": "(0.1294, 0.1216, 0.2039, 1)",
+	##   "index": 1
+	##  },
+	##  {
+	##   "color": "(0.2667, 0.1569, 0.2314, 1)",
+	##   "index": 2
+	##  }
+	## ],
+	## "comment": "Place comment here",
+	## "height": 4,
+	## "width": 8
+	## }
+	## [/codeblock]
 	func create_palette_from_data(palette_name: String, data: Dictionary) -> void:
 		return
 

@@ -189,6 +189,9 @@ class Api:
 		"EmptyClasses/SelectionMap.gd": "Files/Classes/SelectionMap.gd",
 		"EmptyClasses/ShaderImageEffect.gd": "Files/Classes/ShaderImageEffect.gd",
 		"EmptyClasses/Tiles.gd": "Files/Classes/Tiles.gd",
+		"EmptyClasses/ValueSlider.gd": "Files/Classes/ValueSliders/ValueSlider.gd",
+		"EmptyClasses/ValueSliderV2.gd": "Files/Classes/ValueSliders/ValueSliderV2.gd",
+		"EmptyClasses/ValueSliderV3.gd": "Files/Classes/ValueSliders/ValueSliderV3.gd",
 	}
 	func generate_api_files(api_path: String) -> int:
 		DirAccess.make_dir_recursive_absolute(api_path)
