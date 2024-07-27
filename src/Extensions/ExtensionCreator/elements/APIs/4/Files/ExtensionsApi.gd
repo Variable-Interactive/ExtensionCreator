@@ -3,7 +3,7 @@ extends Node
 # curated documentation of the Api.
 # If it still doesn't show try again after doing Project-->Reload current project
 
-## The Official ExtensionsAPI for pixelorama.
+## The Header API synced to pixelorama commit (5eaf81aeae7a5f68e22e58a8d5e07910b6625bf9).
 ##
 ## This Api gives you the essentials to develop a working extension for Pixelorama.[br]
 ## The Api consists of many smaller Apis, each giving access to different areas of the Software.
