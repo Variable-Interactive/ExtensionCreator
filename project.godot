@@ -13,11 +13,7 @@ config_version=5
 config/name="ExtensionCreator"
 config/description="This extension is used to make extensions"
 run/main_scene="res://src/Extensions/ExtensionCreator/Main.tscn"
-config/features=PackedStringArray("4.2")
-
-[autoload]
-
-ExtensionsApi="*res://src/Extensions/ExtensionCreator/elements/APIs/4/Files/ExtensionsApi.gd"
+config/features=PackedStringArray("4.3")
 
 [editor]
 

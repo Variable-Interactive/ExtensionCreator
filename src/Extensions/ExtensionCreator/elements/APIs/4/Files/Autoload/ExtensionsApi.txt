@@ -3,7 +3,8 @@ extends Node
 # curated documentation of the Api.
 # If it still doesn't show try again after doing Project-->Reload current project
 
-## The Header API synced to pixelorama commit (5eaf81aeae7a5f68e22e58a8d5e07910b6625bf9).
+## The Header API synced to pixelorama commit: ff2a5f8b332ba24c15b42474864635c1bacf074a
+## (21 Aug 2024).
 ##
 ## This Api gives you the essentials to develop a working extension for Pixelorama.[br]
 ## The Api consists of many smaller Apis, each giving access to different areas of the Software.
@@ -52,7 +53,7 @@ func get_main_nodes(extension_name: StringName) -> Array[Node]:
 class GeneralAPI:
 	## Returns the current version of pixelorama.
 	func get_pixelorama_version() -> String:
-		return "v1.0-stable"
+		return "v1.0.2-stable"
 
 	## Returns the [ConfigFile] contains all the settings (Brushes, sizes, preferences, etc...).
 	func get_config_file() -> ConfigFile:
@@ -144,7 +145,7 @@ class PanelAPI:
 			return false
 
 	## Adds the [param node] as a tab. Initially it's placed on the same panel as the tools tab,
-	## but can be changed through adding custom layouts.
+	## but can be changed through layouts.
 	func add_node_as_tab(node: Node) -> void:
 		return
 

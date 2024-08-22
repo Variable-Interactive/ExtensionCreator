@@ -53,8 +53,9 @@ func _on_NewExtension_confirmed() -> void:
 	var maker = load(
 		("res://src/Extensions/ExtensionCreator/elements/APIs/%d/Maker.gd"
 		) % extension_json["supported_api_versions"][0]
-	)
-	var api_err = maker.make(save_path, extension_json.name, template)
+	).new()
+	var current_theme = get_node_or_null("/root/ExtensionsApi").theme.get_theme()
+	var api_err = maker.make(save_path, extension_json.name, template, current_theme)
 	if api_err != OK:
 		$Error.popup_centered()
 
@@ -71,6 +72,8 @@ func _on_Name_text_changed(new_text: String) -> void:
 		extension_json.name = %NameEdit.placeholder_text
 	else:
 		extension_json.name = new_text
+	%DisplayNameEdit.text = new_text.capitalize()
+	%DescriptionEdit.text = new_text.capitalize()
 
 
 func _on_DisplayName_text_changed(new_text: String) -> void:

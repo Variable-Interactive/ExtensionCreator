@@ -3,7 +3,7 @@
 	"display_name": "Extension guide and creator",
 	"description": "Serves as a guide and extension creator",
 	"author": "Variable",
-	"version": "1.1",
+	"version": "1.2",
 	"license": "MIT",
 	"nodes": [
 		"Main.tscn"
