@@ -1,12 +1,15 @@
 extends Node
 
-# NOTE: (ExtensionsApi) and get_node_or_null("/root/ExtensionsApi") mean the same thing.
+var api: Node
 
 # This script acts as a setup for the extension
 func _enter_tree() -> void:
-	pass
+	## NOTE: use get_node_or_null("/root/ExtensionsApi") to access api.
+	api = get_node_or_null("/root/ExtensionsApi")
+
+	pass  ## Replace with your code
 
 
 func _exit_tree() -> void:  # Extension is being uninstalled or disabled
 	# remember to remove things that you added using this extension
-	pass
+	pass  ## Replace with your code

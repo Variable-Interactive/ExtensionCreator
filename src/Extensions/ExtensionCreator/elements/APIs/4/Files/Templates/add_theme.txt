@@ -1,6 +1,6 @@
 extends Node
 
-# NOTE: (ExtensionsApi) and get_node_or_null("/root/ExtensionsApi") mean the same thing.
+var api: Node
 
 var theme = load("res://Theme.tres") # Replace this with your theme resource
 # your theme resource must be a derivative of themes from
@@ -11,10 +11,12 @@ var theme = load("res://Theme.tres") # Replace this with your theme resource
 # if a theme from the extension was set in preferences, then it will be automatically be
 # set when pixelorama is launched again
 func _enter_tree() -> void:
+	## NOTE: use get_node_or_null("/root/ExtensionsApi") to access api.
+	api = get_node_or_null("/root/ExtensionsApi")
 	if theme:
-		ExtensionsApi.theme.add_theme(theme)  # Adds the theme to preferences
+		api.theme.add_theme(theme)  # Adds the theme to preferences
 
 
 func _exit_tree() -> void:  # Extension is being uninstalled or disabled
 	if theme:
-		ExtensionsApi.theme.remove_theme(theme)  # Adds the theme to preferences
+		api.theme.remove_theme(theme)  # Adds the theme to preferences
