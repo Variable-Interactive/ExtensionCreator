@@ -51,10 +51,6 @@ run/main_scene="res://src/Extensions/Example/Main.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/description="A pixelorama Extention (The Name and Description field are not related to extention system so they can be anything)"
 
-[autoload]
-
-ExtensionsApi="*res://src/Autoload/ExtensionsApi.gd"
-
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
@@ -113,7 +109,8 @@ application/trademarks=""
 )
 
 	static func make(extension_name: String) -> String:
-		return text.replace("Example", extension_name).replace("<EXCLUDE_ME>", Api.exclude_filter)
+		return text.replace("Example", extension_name).replace("<EXCLUDE_ME>", "")
+		#return text.replace("Example", extension_name).replace("<EXCLUDE_ME>", Api.exclude_filter)
 
 
 class MainTscn:
@@ -189,6 +186,7 @@ class Api:
 		"Files/UI/Nodes/ValueSliderV3.txt",
 	]
 	static func generate_api_files(res_dir_path: String) -> int:
+		return OK  ## Disabling this feature
 		for script_path: String in scripts:
 			var src_path = res_dir_path.path_join("src")
 			var path = script_path.replace("Files", src_path).replace(".txt", ".gd")
