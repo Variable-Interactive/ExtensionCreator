@@ -26,7 +26,8 @@ func make(
 	file.store_string(MainTscn.make(extension_name))  # Main.tscn
 	file = FileAccess.open(main_gd_path, FileAccess.WRITE)
 	file.store_string(
-		MainGd.make(template).replace("<GDExtension>", "extension_name" + "Files")
+		MainGd.make(template).replace(
+			"<GDExtension>", (extension_name + "Files").capitalize().replace(" ", ""))
 	)  # Main.gd
 	file.close()
 
