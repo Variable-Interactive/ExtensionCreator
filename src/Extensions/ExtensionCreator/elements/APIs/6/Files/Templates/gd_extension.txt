@@ -1,0 +1,71 @@
+extends Node
+
+# NOTE This script assumes that "dummy" is the name of your GDExtension
+# (It's not the same thing as Pixelorama's extension):
+#
+# --- BASIC SETUP ---
+# -- STEP 1:
+# Add the GDExtension to "res://addons/" folder
+# -- STEP 2:
+# Locate the bin folder (inside your GDExtension) and Zip all the libraries that are located there
+# and name it "libraries.zip" (Do NOT zip the .gdextension file)
+# -- STEP 3:
+# Modify the paths to your .gdextension file and add the value of your "to_path"
+# (see the DependencyManager class) before them. For example, if a path says
+# "linux/dummy_sdk.so" and your to_path value is  "user://extensions/PixeloramaExtensionFiles"
+# then the modified path should be: "user://extensions/PixeloramaExtensionFiles/linux/dummy_sdk.so"
+# -- STEP 4:
+# Copy the paths to your ".gdextension" file and "libraries.zip" and paste them on
+# "path_to_gdextension" and "your_zipped_libraries" respectively, and you should be good to go.
+
+var extensions_api: Node  ## A variable for easy reference to pixelorama's Api
+
+## Path to your .gdextension file
+var path_to_gdextension := "res://addons/dummy/bin/dummy.gdextension"
+## NOTE: Manually compress all your libraries into a zip file and paste it's path here
+var your_zipped_libraries := "res://addons/dummy/bin/libraries.zip"
+
+
+# This script acts as a setup for the extension
+func _enter_tree() -> void:
+	extensions_api = get_node_or_null("/root/ExtensionsApi")
+	var dependency_manager = DependencyManager.new(your_zipped_libraries)
+	var success: bool = dependency_manager.extract_deps()
+	if success:
+		GDExtensionManager.load_extension(path_to_gdextension)
+	## NOTE: After the GDExtension is loaded, you will gain ability to use classes provided by it
+	## for example; if the GDExtension provides you with a class called "NewClass", then you can
+	## instance it using the code below
+	## NOTE: It is recommended to use ClassDB.class_exists() first, before instantiate()
+
+	### === Your Code here === ###
+	#var DummyClass = ClassDB.instantiate("DummyClass")  ## This is how you initiate a class
+
+	### ====================== ###
+
+
+func _exit_tree() -> void:
+	pass
+
+
+## Automatically extracts dependencies, once the extension loads up (you don't have to touch it)
+class DependencyManager:
+	var to_path = "user://extensions/<GDExtension>"
+	var libraries_zipped_path: String
+
+	func _init(zip_path: String):
+		libraries_zipped_path = zip_path
+
+	func extract_deps() -> bool:
+		var zip_reader := ZIPReader.new()
+		var err := zip_reader.open(libraries_zipped_path)
+		if err == OK:
+			for path in zip_reader.get_files():
+				var content = zip_reader.read_file(path)
+				DirAccess.make_dir_recursive_absolute(to_path.path_join(path).get_base_dir())
+				var file = FileAccess.open(to_path.path_join(path), FileAccess.WRITE)
+				file.store_buffer(content)
+				file.close()
+			return true
+		else:
+			return false

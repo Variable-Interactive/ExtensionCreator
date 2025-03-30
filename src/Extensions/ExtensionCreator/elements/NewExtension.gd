@@ -95,7 +95,7 @@ func _on_Author_text_changed(new_text: String) -> void:
 		extension_json.author = new_text
 
 
-func _on_Target_Api_selected(index: int) -> void:
+func _on_Target_Api_selected(_index: int) -> void:
 	pass  ## Uncomment when i plan on making it support multiple api versions
 	#for button in %TemplateList.get_children():
 		#button.visible = true

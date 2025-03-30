@@ -12,10 +12,10 @@ config_version=5
 
 config/name="ExtensionCreator"
 config/description="This extension is used to make extensions"
+config/tags=PackedStringArray("pixelorama_extension")
 run/main_scene="res://src/Extensions/ExtensionCreator/Main.tscn"
 config/features=PackedStringArray("4.4")
 config/icon="uid://bieoakhpf5qal"
-config/tags=PackedStringArray("pixelorama_extension")
 
 [editor]
 

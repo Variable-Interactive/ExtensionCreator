@@ -25,7 +25,9 @@ func make(
 	file = FileAccess.open(main_tscn_path, FileAccess.WRITE)
 	file.store_string(MainTscn.make(extension_name))  # Main.tscn
 	file = FileAccess.open(main_gd_path, FileAccess.WRITE)
-	file.store_string(MainGd.make(template))  # Main.gd
+	file.store_string(
+		MainGd.make(template).replace("<GDExtension>", "extension_name" + "Files")
+	)  # Main.gd
 	file.close()
 
 	if template == MainGd.ADD_THEME:
@@ -138,7 +140,15 @@ script = ExtResource( 1 )
 
 
 class MainGd:
-	enum { BARE_MINIMUM, ADD_PANNEL, ADD_MENU_ITEM, ADD_THEME, PROJECT_MANIPULATOR, NEW_EXPORTER }
+	enum {
+		BARE_MINIMUM,
+		ADD_PANNEL,
+		ADD_MENU_ITEM,
+		ADD_THEME,
+		PROJECT_MANIPULATOR,
+		NEW_EXPORTER,
+		GD_EXTENSION
+	}
 	const base_path = "res://src/Extensions/ExtensionCreator/elements/APIs/6"
 	const scripts := {
 		BARE_MINIMUM : "Files/Templates/bare_minimum.txt",
@@ -147,6 +157,7 @@ class MainGd:
 		ADD_THEME: "Files/Templates/add_theme.txt",
 		PROJECT_MANIPULATOR: "Files/Templates/project_manipulator.txt",
 		NEW_EXPORTER: "Files/Templates/add_exporter.txt",
+		GD_EXTENSION: "Files/Templates/gd_extension.txt",
 	}
 
 	static func make(idx: int) -> String:
