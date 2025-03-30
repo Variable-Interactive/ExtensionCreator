@@ -62,10 +62,11 @@ class DependencyManager:
 		if err == OK:
 			for path in zip_reader.get_files():
 				var content = zip_reader.read_file(path)
-				DirAccess.make_dir_recursive_absolute(to_path.path_join(path).get_base_dir())
-				var file = FileAccess.open(to_path.path_join(path), FileAccess.WRITE)
-				file.store_buffer(content)
-				file.close()
+				if content:
+					DirAccess.make_dir_recursive_absolute(to_path.path_join(path).get_base_dir())
+					var file = FileAccess.open(to_path.path_join(path), FileAccess.WRITE)
+					file.store_buffer(content)
+					file.close()
 			return true
 		else:
 			return false
