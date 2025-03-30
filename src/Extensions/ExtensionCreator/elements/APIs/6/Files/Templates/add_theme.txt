@@ -1,22 +1,21 @@
 extends Node
 
-var api: Node
+@onready var extension_api: Node  ## A variable for easy reference to the Api
 
 var theme = load("res://Theme.tres") # Replace this with your theme resource
 # your theme resource must be a derivative of themes from
 # https://github.com/Orama-Interactive/Pixelorama/tree/master/assets/themes
-# or else a CRASH might occur
+# or else a CRASH might occur.
 
 
 # if a theme from the extension was set in preferences, then it will be automatically be
 # set when pixelorama is launched again
 func _enter_tree() -> void:
-	## NOTE: use get_node_or_null("/root/ExtensionsApi") to access api.
-	api = get_node_or_null("/root/ExtensionsApi")
+	extension_api = get_node_or_null("/root/ExtensionsApi")  # Accessing the Api
 	if theme:
-		api.theme.add_theme(theme)  # Adds the theme to preferences
+		extension_api.theme.add_theme(theme)  # Adds the theme to preferences
 
 
 func _exit_tree() -> void:  # Extension is being uninstalled or disabled
 	if theme:
-		api.theme.remove_theme(theme)  # Adds the theme to preferences
+		extension_api.theme.remove_theme(theme)  # Adds the theme to preferences

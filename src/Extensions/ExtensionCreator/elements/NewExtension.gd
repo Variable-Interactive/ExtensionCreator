@@ -7,7 +7,7 @@ var extension_json := {
 	"description": "What the Extension Does",
 	"author": "Your Name",
 	"version": "0.1",
-	"supported_api_versions": [4],
+	"supported_api_versions": [6],
 	"license": "MIT",
 	"nodes": [
 		"Main.tscn"
@@ -17,7 +17,7 @@ var extension_json := {
 
 func _ready() -> void:
 	# api aptions along with their represented versions
-	api_options.add_item("Pixelorama 1.0.x", 4)
+	api_options.add_item("Pixelorama 1.1.x", 6)
 
 	api_options.selected = api_options.get_item_count() - 1
 	for button_idx in %TemplateList.get_child_count():
@@ -51,11 +51,11 @@ func _on_NewExtension_confirmed() -> void:
 
 	# Step 2 : make the rest of the files
 	var maker = load(
-		("res://src/Extensions/ExtensionCreator/elements/APIs/%d/Maker.gd"
+		(
+			"res://src/Extensions/ExtensionCreator/elements/APIs/%d/Maker.gd"
 		) % extension_json["supported_api_versions"][0]
 	).new()
-	var current_theme = get_node_or_null("/root/ExtensionsApi").theme.get_theme()
-	var api_err = maker.make(save_path, extension_json.name, template, current_theme)
+	var api_err = maker.make(save_path, extension_json, template)
 	if api_err != OK:
 		$Error.popup_centered()
 

@@ -1,20 +1,20 @@
 extends Node
 
-var api: Node
+@onready var extension_api: Node  ## A variable for easy reference to the Api
 var id: int
 
 func _enter_tree() -> void:
 	## NOTE: use get_node_or_null("/root/ExtensionsApi") to access api.
-	api = get_node_or_null("/root/ExtensionsApi")
+	extension_api = get_node_or_null("/root/ExtensionsApi")
 	var exporter_info := {"extension": ".png", "description": "Only Alternate Frames"}
-	id = api.export.add_export_option(
-		exporter_info, self, api.export.ExportTab.IMAGE, false
+	id = extension_api.export.add_export_option(
+		exporter_info, self, extension_api.export.ExportTab.IMAGE, false
 	)  # 2nd argument (in this case "self") must have "override_export()" in it's script
 
 
 func _exit_tree() -> void:
 	# remember to remove things that you added using this extension
-	api.export.remove_export_option(id)
+	extension_api.export.remove_export_option(id)
 
 
 func override_export(details: Dictionary) -> bool:
@@ -22,7 +22,7 @@ func override_export(details: Dictionary) -> bool:
 	# return true for SUCCESS, false for FAILURE
 
 	# the (details) include everything you could possibly need for exporting
-	# keys of (details) are:
+	# keys of the "details" dictionary include:
 	# "processed_images", "export_dialog", "export_paths", "project"
 	# (Note: processed_images is an array of ProcessedImage resource which further has parameters
 	# called image and duration)
