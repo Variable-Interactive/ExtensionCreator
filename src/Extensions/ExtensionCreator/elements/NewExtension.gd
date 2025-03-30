@@ -30,21 +30,17 @@ func _on_NewExtension_about_to_show() -> void:
 
 
 func _on_NewExtension_confirmed() -> void:
-	var save_path = %path.text
-	if save_path.ends_with("/"):
-		save_path[-1] = ""
-	save_path += str("/", extension_json.name, "/")
-
-	var extension_path = str(save_path, "src/Extensions/", extension_json.name, "/")
+	var save_path: String = %path.text.path_join(extension_json.name)
+	var extension_json_dir = save_path.path_join("src/Extensions").path_join(extension_json.name)
 
 	# Step 1 : create a base directory
-	DirAccess.make_dir_recursive_absolute(extension_path)
+	DirAccess.make_dir_recursive_absolute(extension_json_dir)
 	if DirAccess.get_open_error() != OK:
 		$Error.popup_centered()
 		return
 
 	# Step 2 : make an extension.json
-	var json_path = extension_path.path_join("extension.json")
+	var json_path = extension_json_dir.path_join("extension.json")
 	var file := FileAccess.open(json_path, FileAccess.WRITE)
 	file.store_string(var_to_str(extension_json))
 	file.close()
@@ -73,7 +69,9 @@ func _on_Name_text_changed(new_text: String) -> void:
 	else:
 		extension_json.name = new_text
 	%DisplayNameEdit.text = new_text.capitalize()
+	_on_DisplayName_text_changed(%DisplayNameEdit.text)
 	%DescriptionEdit.text = new_text.capitalize()
+	_on_Description_text_changed(%DisplayNameEdit.text)
 
 
 func _on_DisplayName_text_changed(new_text: String) -> void:
@@ -98,11 +96,12 @@ func _on_Author_text_changed(new_text: String) -> void:
 
 
 func _on_Target_Api_selected(index: int) -> void:
-	for button in %TemplateList.get_children():
-		button.visible = true
-	match index:
-		0:
-			extension_json["supported_api_versions"][0] = 3  # 0.11.x
+	pass  ## Uncomment when i plan on making it support multiple api versions
+	#for button in %TemplateList.get_children():
+		#button.visible = true
+	#match index:
+		#0:
+			#extension_json["supported_api_versions"][0] = ***
 
 
 func _on_Version_value_changed(value: float) -> void:

@@ -8,13 +8,16 @@ func make(
 	current_theme: Theme = null
 ) -> int:
 	var extension_name: StringName = extension_json.get("name", "Example")
-	var extension_path = save_path.path_join("src/Extensions/").path_join(extension_name)
+	var extension_path = save_path.path_join("src/Extensions").path_join(extension_name)
 	var project_path = save_path.path_join("project.godot")
 	var export_cfg_path = save_path.path_join("export_presets.cfg")
 	var main_tscn_path = extension_path.path_join("Main.tscn")
 	var main_gd_path = extension_path.path_join("Main.gd")
 
 	# Step 1 : make extension files first
+	var icon: Image = Image.load_from_file("res://icon.png")
+	if icon:
+		icon.save_png(save_path.path_join("icon.png"))
 	var file = FileAccess.open(project_path, FileAccess.WRITE)
 	file.store_string(ProjectGodot.make(extension_json))  # project.godot
 	file = FileAccess.open(export_cfg_path, FileAccess.WRITE)
@@ -51,6 +54,7 @@ run/main_scene="res://src/Extensions/Example/Main.tscn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/description="A pixelorama Extention"
 config/tags=PackedStringArray("pixelorama_extension")
+config/icon="res://icon.png"
 
 [rendering]
 
