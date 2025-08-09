@@ -3,7 +3,7 @@
 	"display_name": "Extension guide and creator",
 	"description": "Serves as a guide and extension creator",
 	"author": "Variable",
-	"version": "1.4",
+	"version": "1.5",
 	"license": "MIT",
 	"nodes": ["Main.tscn"],
 	"supported_api_versions": [6],

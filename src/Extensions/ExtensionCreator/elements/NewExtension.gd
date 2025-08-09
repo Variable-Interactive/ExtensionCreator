@@ -35,7 +35,8 @@ func _on_NewExtension_confirmed() -> void:
 
 	# Step 1 : create a base directory
 	DirAccess.make_dir_recursive_absolute(extension_json_dir)
-	if DirAccess.get_open_error() != OK:
+	if not DirAccess.dir_exists_absolute(extension_json_dir):
+		$Error.dialog_text = "Error: %s not created" % extension_json_dir
 		$Error.popup_centered()
 		return
 
@@ -53,6 +54,7 @@ func _on_NewExtension_confirmed() -> void:
 	).new()
 	var api_err = maker.make(save_path, extension_json, template)
 	if api_err != OK:
+		$Error.dialog_text = "Error: %s" % error_string(api_err)
 		$Error.popup_centered()
 
 
