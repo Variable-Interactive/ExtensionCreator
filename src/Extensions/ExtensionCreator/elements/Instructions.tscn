@@ -129,7 +129,7 @@ focus_mode = 2
 bbcode_enabled = true
 text = "EXPLANATION:
 
-[color=#a8ffffff]\"supported_api_versions\"[/color] sets the api level of the extension ( E.g [color=yellow][ 7 ][/color] means you are making extension for [color=yellow]Pixelorama 1.1.5[/color], [color=green][ 3 ][/color] means [color=green]Pixelorama 1.1.6[/color] and possibly above)
+[color=#a8ffffff]\"supported_api_versions\"[/color] sets the api level of the extension ( E.g [color=yellow][ 7 ][/color] means you are making extension for [color=yellow]Pixelorama 1.1.5[/color], [color=green][ 8 ][/color] means [color=green]Pixelorama 1.1.6[/color] and possibly above)
 You can skip this parameter completely if your extension is universal (does no use API) or combine two api levels e.g [ 8, 9 ] if you intend to target 2 different versions
 
 The nodes inside [color=#a8ffffff]\"nodes\"[/color] array are the ones that will automatically be instanced by Pixelorama as soon as the Extension is loaded. In this example \"Main.tscn\" will be instanced in pixelorama and the rest (E.g; instancing other nodes, handling stuff etc.) will be done through a script attached to it (for this example that script is called Main.gd)

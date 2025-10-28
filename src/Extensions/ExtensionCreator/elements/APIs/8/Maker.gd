@@ -151,7 +151,7 @@ class MainGd:
 		NEW_EXPORTER,
 		GD_EXTENSION
 	}
-	const base_path = "res://src/Extensions/ExtensionCreator/elements/APIs/6"
+	const base_path = "res://src/Extensions/ExtensionCreator/elements/APIs/8"
 	const scripts := {
 		BARE_MINIMUM : "Files/Templates/bare_minimum.txt",
 		ADD_PANNEL : "Files/Templates/add_pannel.txt",

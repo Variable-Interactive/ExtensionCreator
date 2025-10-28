@@ -123,7 +123,7 @@ var theme_colors: Dictionary[String, String] = {
 	"title_button_pressed:Tree:background_color": "000000ff"
 }
 
-
+var our_theme: Theme
 
 ## This script acts as a setup for the extension
 func _enter_tree() -> void:
@@ -139,10 +139,11 @@ func _enter_tree() -> void:
 		# Copies the dictionary for the dev to paste at "theme_colors". set is_getting_dictionary
 		# to false (permanently) after this
 		DisplayServer.clipboard_set(
-			JSON.stringify(extension_api.theme.get_theme_colors(base_theme), "\n")
+			JSON.stringify(extension_api.theme.get_theme_colors(base_theme), "\t")
 		)
+		extension_api.dialog.show_error("Theme colors copied!!!")
 		return
-	var our_theme: Theme = base_theme.duplicate_deep()
+	our_theme = base_theme.duplicate_deep()
 	## Minor border adjustments
 	var p_container_stylebox: StyleBoxFlat = our_theme.get_stylebox("tab_unselected", "TabBar")
 	p_container_stylebox.border_width_left = 0
@@ -157,5 +158,11 @@ func _enter_tree() -> void:
 	## Set colors
 	our_theme.resource_name = "High Contrast"
 	extension_api.theme.set_theme_colors(our_theme, theme_colors)
-	extension_api.theme.add_theme(our_theme)
+
+	extension_api.theme.add_theme(our_theme)  # Adds the theme to preferences
 	# |=============================|
+
+
+func _exit_tree() -> void:  # Extension is being uninstalled or disabled
+	if our_theme:
+		extension_api.theme.remove_theme(our_theme)  # Removes the theme from preferences
