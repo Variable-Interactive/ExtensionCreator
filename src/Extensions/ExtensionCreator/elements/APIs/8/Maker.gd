@@ -5,7 +5,7 @@ func make(
 	save_path: String,
 	extension_json: Dictionary,
 	template := MainGd.ADD_PANNEL,
-	current_theme: Theme = null
+	_current_theme: Theme = null
 ) -> int:
 	var extension_name: StringName = extension_json.get("name", "Example")
 	var extension_path = save_path.path_join("src/Extensions").path_join(extension_name)
@@ -31,8 +31,9 @@ func make(
 	)  # Main.gd
 	file.close()
 
-	if template == MainGd.ADD_THEME:
-		ResourceSaver.save(current_theme, save_path.path_join("Theme.tres"))
+	# Since Api 8, we have a better way for manipulating themes
+	#if template == MainGd.ADD_THEME:
+	#	ResourceSaver.save(current_theme, save_path.path_join("Theme.tres"))
 
 	return OK
 
@@ -54,7 +55,7 @@ config_version=5
 
 config/name="Example"
 run/main_scene="res://src/Extensions/Example/Main.tscn"
-config/features=PackedStringArray("4.4", "GL Compatibility")
+config/features=PackedStringArray("4.5", "GL Compatibility")
 config/description="A pixelorama Extention"
 config/tags=PackedStringArray("pixelorama_extension")
 config/icon="res://icon.png"

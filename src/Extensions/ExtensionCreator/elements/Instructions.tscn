@@ -108,7 +108,7 @@ text = "{
     \"description\": \"What the extension does\",
     \"author\": \"Your Name\",
     \"version\": \"0.1\",
-	\"supported_api_versions\": [3],
+	\"supported_api_versions\": [8],
     \"license\": \"MIT\",
     \"nodes\": [
         \"Main.tscn\"
@@ -129,8 +129,8 @@ focus_mode = 2
 bbcode_enabled = true
 text = "EXPLANATION:
 
-[color=#a8ffffff]\"supported_api_versions\"[/color] sets the api level of the extension ( E.g [color=yellow][ 4 ][/color] means you are making extension for [color=yellow]Pixelorama 1.0.x[/color], [color=green][ 3 ][/color] means [color=green]Pixelorama 0.11.x[/color])
-You can skip this parameter completely if your extension is universal or combine two api levels e.g [ 2, 3 ] if you intend to target 2 different versions
+[color=#a8ffffff]\"supported_api_versions\"[/color] sets the api level of the extension ( E.g [color=yellow][ 7 ][/color] means you are making extension for [color=yellow]Pixelorama 1.1.5[/color], [color=green][ 3 ][/color] means [color=green]Pixelorama 1.1.6[/color] and possibly above)
+You can skip this parameter completely if your extension is universal (does no use API) or combine two api levels e.g [ 8, 9 ] if you intend to target 2 different versions
 
 The nodes inside [color=#a8ffffff]\"nodes\"[/color] array are the ones that will automatically be instanced by Pixelorama as soon as the Extension is loaded. In this example \"Main.tscn\" will be instanced in pixelorama and the rest (E.g; instancing other nodes, handling stuff etc.) will be done through a script attached to it (for this example that script is called Main.gd)
 

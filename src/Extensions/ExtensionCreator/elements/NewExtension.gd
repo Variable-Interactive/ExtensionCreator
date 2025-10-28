@@ -7,7 +7,7 @@ var extension_json := {
 	"description": "What the Extension Does",
 	"author": "Your Name",
 	"version": "0.1",
-	"supported_api_versions": [6],
+	"supported_api_versions": [8],
 	"license": "MIT",
 	"nodes": [
 		"Main.tscn"
@@ -17,7 +17,7 @@ var extension_json := {
 
 func _ready() -> void:
 	# api aptions along with their represented versions
-	api_options.add_item("Pixelorama 1.1.x", 6)
+	api_options.add_item("Pixelorama >= 1.1.5", 8)
 
 	api_options.selected = api_options.get_item_count() - 1
 	for button_idx in %TemplateList.get_child_count():
